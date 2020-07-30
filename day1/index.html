@@ -3,9 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>js30day1</title>
+  <title>JS PIANO KIT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
+  <div class="keys">
+    <div class="key" data-key="65">
+      <kbd>A</kbd>
+      <span class="sound">ド</span>
+    </div>
+    <div class="key" data-key="83">
+      <kbd>S</kbd>
+      <span class="sound">レ</span>
+    </div>
+    <div class="key" data-key="68">
+      <kbd>D</kbd>
+      <span class="sound">ミ</span>
+    </div>
+    <div class="key" data-key="70">
+      <kbd>F</kbd>
+      <span class="sound">ファ</span>
+    </div>
+    <div class="key" data-key="74">
+      <kbd>J</kbd>
+      <span class="sound">ソ</span>
+    </div>
+    <div class="key" data-key="75">
+      <kbd>K</kbd>
+      <span class="sound">ラ</span>
+    </div>
+    <div class="key" data-key="76">
+      <kbd>L</kbd>
+      <span class="sound">シ</span>
+    </div>
+    <div class="key" data-key="186">
+      <kbd>;</kbd>
+      <span class="sound">ド</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="music/1do.wav"></audio>
+  <audio data-key="83" src="music/2re.wav"></audio>
+  <audio data-key="68" src="music/3mi.wav"></audio>
+  <audio data-key="70" src="music/4fa.wav"></audio>
+  <audio data-key="74" src="music/5so.wav"></audio>
+  <audio data-key="75" src="music/6ra.wav"></audio>
+  <audio data-key="76" src="music/7si.wav"></audio>
+  <audio data-key="186" src="music/8do.wav"></audio>
+
+  <script>
+    window.addEventListener('keydown', function(e){
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+      if(!audio) return
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add('playing');
+    })
+
+    function removeTransition(e){
+      if(e.propertyName !== 'transform') return;
+      this.classList.remove('playing')
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  </script>
 </body>
 </html>
