@@ -1,0 +1,622 @@
+<p>In today's exercise, we're going to be
+
+
+  talking about something that is brand
+  spanking new to CSS and that is CSS
+  
+
+  variables. And now, I know what you're
+  saying, "Wes, we've had variables in SAS
+  
+
+  forever and this is not new." But it
+  is new, smart Alec, because CSS
+  
+
+  variables can be updated with JavaScript,
+  meaning that when you update a variable
+  
+
+  in CSS, everywhere on the page that that
+  variable is referenced will update itself.
+  
+
+  With SAS, you define them at compile time
+  and then it gets compiled and you cannot
+  
+
+  change it. So let's take a look here. I've
+  got three variables, spacing, blur,
+  
+
+  and base color. And when I change one of
+  those, like spacing, it will just
+  
+
+  immediately update wherever that
+  variable is changed on the page,
+  
+
+  same with blur. I'm only using that on
+  this imagery here. But as I change it,
+  
+
+  it's going to update.
+  
+
+  And then finally base color, I'm using it
+  for the background of this image as well
+  
+
+  as the color of this JS highlight here.
+  So when I change that color,
+  
+
+  it updates everywhere it's referenced on
+  the actual page. So let's jump in.
+  
+
+  Let's take a quick look at our HTML here.
+  I've got h2 which has a span with a class
+  
+
+  of highlight or hl around JS. And
+  then I've got a label and input for the
+  
+
+  spacing which has a min of 10, a max of
+  200. And we've got a range which does our
+  
+
+  blur. And we've got an input type of color
+  which gives you that kind of cool color
+  
+
+  picker. You're getting at bit of a
+  different color picker off your own
+  
+
+  windows or something like that but it'll
+  always open up whatever that default color
+  
+
+  picker is on your system. Then we've
+  got the image and we're styling.
+  
+
+  Now, let's actually jump into...opening
+  this up in our browser.
+  
+
+  Let's jump into some CSS variables first
+  because we need to understand how they
+  
+
+  work before we can write any of our
+  JavaScript to update them.
+  
+
+  So the way that CSS variables work is that
+  you declare them on some sort of element
+  
+
+  in our case, we're going to declare it on
+  root which is sort of the highest level
+  
+
+  that you can get, very similar to
+  declaring it on the HTML element.
+  
+
+  And here's where we're going to set our
+  default values for those variables.
+  
+
+  So we're going to have a base variable
+  that's going to be set to the Wes base
+  
+
+  yellow color. We're going to have a
+  spacing variable which is going to be
+  
+
+  defaulted to 10 pixels and we're going to
+  give ourselves a blur variable which is
+  
+
+  also going to be defaulted to 10 pixels.
+  Now, we've defined these variables,
+  
+
+  and we can go ahead
+  and start using them.
+  
+
+  So let's grab our image that's on the page
+  here and give it a padding of...and now
+  
+
+  when you want to use a variable in CSS,
+  you say "var" and you pass it the spacing.
+  
+
+  Now this dash-dash, I know you're like,
+  "What the hell are you doing,
+  
+
+  Wes?" That is the standard in CSS, that's
+  how you do it. It's normally like dollar
+  
+
+  in SAS or something like that. But in
+  CSS, it's dash-dash. Don't yell at me,
+  
+
+  that's how they decided to go about it so
+  that it would be backwards compatible with
+  
+
+  all the CSS that were older browsers spec.
+  And look, the padding is based on the
+  
+
+  spacing and it's giving us some...you can
+  see the green there. Okay, that works.
+  
+
+  Then we want to work on the background is
+  going to be our variable base which is
+  
+
+  going to be that yellow color. Okay,
+  looking good. The image is taking a second
+  
+
+  to load. Then if I were to change this
+  spacing to 50 pixels, refresh,
+  
+
+  you see it's much bigger. Put it back down
+  to 10 it's going to take that variable
+  
+
+  from spacing and I don't
+  need to re-declare it.
+  
+
+  And then finally, we are going to give it
+  a filter which is a blur and we want to
+  
+
+  use the variable "blur." Good. Now we want
+  to work with this JS highlight here.
+  
+
+  So we'll say anything with the class
+  of highlight is going to have the color of
+  
+
+  variable base. Great. So anywhere now
+  we're referencing this color right here
+  
+
+  and right here, it's going to be changed
+  if I were just to change this to maybe
+  
+
+  like red, everywhere on the page
+  gets...you get the point, right?
+  
+
+  It's a variable and you reference it
+  and it's going to be used.
+  
+
+  Now, how do we write some JavaScript to
+  update those? Well, let's go ahead and do
+  
+
+  that. First thing that we need to do is we
+  need to select all three of these inputs
+  
+
+  right here so that when they change, we
+  can then update the CSS variables which
+  
+
+  will in turn update the colors on the
+  screen so we'll scroll down to our script
+  
+
+  tags here and we will select all of our
+  inputs on the page, so const inputs
+  
+
+  equals, and I'm going to use
+  document.querySelectorAll. And our
+  
+
+  selector here is going to be .controls
+  input, so that's going to select all the
+  
+
+  inputs on the page.
+  
+
+  Real quick aside, in the last video, I
+  said that the querySelector will give you
+  
+
+  an array. And what I really meant is it
+  gives you something called a NodeList.
+  
+
+  If I run this in my console here, it
+  returns to you what actually looks like
+  
+
+  an array. It's got square brackets. It has
+  index items. It has a length.
+  
+
+  But it's not an array. And the difference
+  between a NodeList and an array is that an
+  
+
+  array has all kinds of methods for dealing
+  with an array like map and reduce and all
+  
+
+  the good ones. And if you open up the
+  prototype for the NodeList,
+  
+
+  you see we only have a couple methods
+  here, entries for each keys and values and
+  
+
+  then a couple other little things here.
+  Whereas if I had an array,
+  
+
+  like one, two, three, R X equals, and
+  I have X, and I open that up and look
+  
+
+  at the prototype of that. Oh, look at all
+  these good stuff. There's everything that
+  
+
+  you're used to.
+  
+
+  So sometimes you'll see people converting
+  their NodeList to an array.
+  
+
+  And in some future exercises, we're going
+  to have to do that. But in our case,
+  
+
+  what we're going to use to loop over these
+  inputs is the forEach method which has
+  
+
+  just recently been added to the NodeList,
+  so it's not necessary for us to convert it
+  
+
+  to an array unless you're using an older
+  browser that does not support having
+  
+
+  forEach on it. So what we want to do now
+  is create our function called
+  
+
+  handleUpdate, function handleUpdate and
+  we'll just console.log this.value for each
+  
+
+  of them. And then we'll listen for a
+  change event on each of the inputs.
+  
+
+  So we'll say inputs.forEach and then we
+  want to loop over each one.
+  
+
+  We have an input, I'm going to use an
+  arrow function just to be nice and clean
+  
+
+  here, the input.addEventListener.
+  We want to listen for the change event.
+  
+
+  And when that is called, we're
+  going to call handleUpdate.
+  
+
+  Good. Now when we open up our console here
+  and I change one of these and I move and
+  
+
+  let go 75, 102, 167, you see my blur will
+  change as well. So I'm seeing the values
+  
+
+  change whenever I change the value of
+  one of these. But one little thing is you
+  
+
+  notice that as I drag it around, it
+  doesn't actually trigger a change.
+  
+
+  What we can do is we can also listen for
+  the mousemove update which when you move
+  
+
+  over it looks like it's going to trigger
+  every single time. There's some flags that
+  
+
+  you could set where when click,
+  set it to true, when you click off,
+  
+
+  set it to false. We're going to keep it
+  really simple here where when I move the
+  
+
+  value, it's also going to trigger a
+  change rather than just when I let go.
+  
+
+  So we're listening for change and mouse
+  move and it's going to call handleUpdate
+  
+
+  regardless of which one that happened.
+  
+
+  Now let's go into this handleUpdate here
+  and let's work on getting the values out
+  
+
+  of it. So the first thing we need to know
+  is what is the suffix of the value that
+  
+
+  we're working on. Because if we go up to
+  our variables here, this base doesn't have
+  
+
+  a suffix, it's just a hex code or RGB
+  value that's going to come out of the
+  
+
+  input. But the spacing and the blur,
+  they're going to give us values like 10
+  
+
+  but they need to be 10px. So what I've
+  done is I've attached some additional info
+  
+
+  to each of this inputs right here
+  where I've created a data attribute.
+  
+
+  Again, a data attribute is just an
+  attribute that you've made up.you just
+  
+
+  have to prefix it with data-dash
+  something. And I've put on a sizing or a
+  
+
+  suffix value here called px. And then this
+  one, I haven't. So what we can do in here
+  
+
+  is we can say const suffix
+  equals this.dataset because...
+  
+
+  What is this.dataset? Let's take a quick
+  look at that a second.
+  
+
+  Console.log this.dataset and if I change
+  it...you see, dataset is an object that
+  
+
+  will contain all the data attributes
+  from that specific element.
+  
+
+  In this case, it's just sizing. But if I
+  were to go up to this first one here,
+  
+
+  data-name equals wes and data-dash cool
+  equals, we'll put a poop in there.
+  
+
+  Now, let's see what we got. We got
+  a poop, sure do have a poop.
+  
+
+  Here we go. Open it up, we've
+  got an object of all of the things.
+  
+
+  So dataset is just an object that all
+  ready. You don't have to select it.
+  
+
+  You don't have to use any attribute
+  selectors from it. It will just take
+  
+
+  everything that has data-dash on that
+  element and put it into a nice tidy little
+  
+
+  object for you.
+  
+
+  So we want to go back down to this. We'll
+  say suffix equals this.dataset.
+  
+
+  and what do we call it, sizing. Good.
+  And then for some of them,
+  
+
+  they don't have a sizing like the color
+  one, so I'm just going to say "or nothing"
+  
+
+  because if I don't leave it at that, we're
+  gonna upend undefined in the end and
+  
+
+  that's not what we want. So it's "or
+  nothing," it's just going to fall back.
+  
+
+  So let's console.log suffix, see
+  what we're working with here.
+  
+
+  So pixels, good. Pixels for that one. And
+  then when I hover over this one,
+  
+
+  you see nothing and that's because
+  there is no suffix for the hex code.
+  
+
+  Now, what we need to do is update the
+  actual variable. So how do you select a
+  
+
+  variable? And then the way that that works
+  is we are going to select our entire
+  
+
+  document which is our root here and
+  we're going to set a property of base,
+  
+
+  spacing, or blur and you'll notice that we
+  use the name here, name spacing,
+  
+
+  name blur, and name base. So we go down
+  here and let's console.log this.name.
+  
+
+  Blur, spacing, base, good. We say
+  document.documentElement.style.setProperty
+  
+
+  and we're going to set the property of
+  usually --base or --spacing but those
+  
+
+  things are going to be variable so
+  because we're using back text here,
+  
+
+  we can plop that variable name in this
+  .name and then it's going to be set
+  
+
+  to this, .value. Now, that's not
+  going to get us all the way there,
+  
+
+  and I'll show you just a sec here.
+  
+
+  Let's open up our elements panel and let's
+  change our blur. You see what's happening
+  
+
+  here? The blur value is changing but there
+  is no pixels being upended to the end.
+  
+
+  And that's why we created this suffix
+  variable, so we can tack on the suffix
+  
+
+  variable onto the end. And now when I
+  refresh, let's switch out the image here
+  
+
+  because the other one's having trouble
+  loading. And I change one of these,
+  
+
+  you'll see that the value is being updated
+  124px, blur 10px. As you change it
+  
+
+  it's going to be immediately updated.
+  Let's double check that the color one
+  
+
+  works as well. Perfect. So that's today's
+  exercise. Again, when you use a CSS
+  
+
+  variable, you can then update that
+  variable on any element and any selectors
+  
+
+  that are inside of that element that
+  reference that variable will be using it.
+  
+
+  So one other thing you could do is you
+  could also scope them to be just on a
+  
+
+  specific div. So if I were to take
+  this h2 and add an attribute of
+  
+
+  style equals and I want to change the
+  variable base to be a badass,
+  
+
+  oh, look what happened there.
+  
+
+  So even though this base variable is right
+  here, because I've specified the variable
+  
+
+  lower down and inside of that, this
+  highlight is referencing the variable,
+  
+
+  this one wins out over this one. Much like
+  the CSS cascade, the closer one will
+  
+
+  always win out. And I can go ahead
+  and keep changing this value,
+  
+
+  and this one's not going to change because
+  I've updated it at a lower scope.
+  
+
+  Hopefully you enjoyed that.
+  See you in the next one.</p>
